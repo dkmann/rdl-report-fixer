@@ -22,8 +22,6 @@ namespace ConsoleApplication
             string temporaryFile = Path.Combine(Path.GetDirectoryName(this._report),
                 "report-temp.rdl");
 
-            int numberOfIssuesFixed = 0;
-
             // Open a stream for the temporary file.
             using (var temporaryFileStream = new StreamWriter(File.OpenWrite(temporaryFile)))
             {

@@ -35,7 +35,7 @@ namespace ConsoleApplication
                         // Do the pattern replacement.
                         ConvertCmToMm(ref line);
                         RoundDecimals(ref line);
-                        ReplaceReportUnits(ref line);
+                        ReplaceReportUnitType(ref line);
 
                         // Write the modified line to the new file.
                         temporaryFileStream.WriteLine(line);
@@ -74,7 +74,7 @@ namespace ConsoleApplication
                 });
         }
 
-        private void ReplaceReportUnits(ref string line)
+        private void ReplaceReportUnitType(ref string line)
         {
             var pattern = "<rd:ReportUnitType>Cm</rd:ReportUnitType>";
 

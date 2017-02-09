@@ -38,7 +38,6 @@ namespace ConsoleApplication
                         ConvertCmToMm(ref line);
                         RoundDecimals(ref line);
 
-
                         var reportUnitPattern = @"<rd:ReportUnitType>Cm</rd:ReportUnitType>";
 
                         line = Regex.Replace(line, reportUnitPattern,
@@ -64,7 +63,8 @@ namespace ConsoleApplication
 
             line = Regex.Replace(line, pattern,
                 match =>
-                {   this._numberOfIssuesFixed++;
+                {
+                    this._numberOfIssuesFixed++;
                     var number = double.Parse(match.Groups[1].Value);
                     return (number * 10).ToString() + "mm";
                 });

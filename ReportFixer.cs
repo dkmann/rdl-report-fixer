@@ -78,13 +78,13 @@ namespace ConsoleApplication
 
         private void ReplaceReportUnits(ref string line)
         {
-            var reportUnitPattern = @"<rd:ReportUnitType>Cm</rd:ReportUnitType>";
+            var pattern = "<rd:ReportUnitType>Cm</rd:ReportUnitType>";
 
-            line = Regex.Replace(line, reportUnitPattern,
+            line = Regex.Replace(line, pattern,
                 match =>
                 {
                     this._numberOfIssuesFixed++;
-                    return @"<rd:ReportUnitType>Mm</rd:ReportUnitType>";
+                    return "<rd:ReportUnitType>Mm</rd:ReportUnitType>";
                 });
         }
     }

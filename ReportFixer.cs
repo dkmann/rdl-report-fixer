@@ -22,8 +22,6 @@ namespace ConsoleApplication
             string temporaryFile = Path.Combine(Path.GetDirectoryName(this._report),
                 "report-temp.rdl");
 
-            int numberOfIssuesFixed = 0;
-
             // Open a stream for the temporary file.
             using (var temporaryFileStream = new StreamWriter(File.OpenWrite(temporaryFile)))
             {
@@ -37,22 +35,15 @@ namespace ConsoleApplication
                         // Do the pattern replacement.
                         ConvertCmToMm(ref line);
                         RoundDecimals(ref line);
-
-                        var reportUnitPattern = @"<rd:ReportUnitType>Cm</rd:ReportUnitType>";
-
-                        line = Regex.Replace(line, reportUnitPattern,
-                            match =>
-                            {
-                                numberOfIssuesFixed++;
-                                return @"<rd:ReportUnitType>Mm</rd:ReportUnitType>";
-                            });
+                        ReplaceReportUnitType(ref line);
 
                         // Write the modified line to the new file.
                         temporaryFileStream.WriteLine(line);
                     }
                 }
             }
-            // Replace current with temporary.
+
+            // Replace the current file with temporary one.
             File.Delete(this._report);
             File.Move(temporaryFile, this._report);
         }
@@ -81,6 +72,18 @@ namespace ConsoleApplication
                     var number = double.Parse(match.Groups[1].Value);
                     number = Math.Round(number, 0, MidpointRounding.AwayFromZero);
                     return (number).ToString() + "mm";
+                });
+        }
+
+        private void ReplaceReportUnitType(ref string line)
+        {
+            var pattern = "<rd:ReportUnitType>Cm</rd:ReportUnitType>";
+
+            line = Regex.Replace(line, pattern,
+                match =>
+                {
+                    this._numberOfIssuesFixed++;
+                    return "<rd:ReportUnitType>Mm</rd:ReportUnitType>";
                 });
         }
     }

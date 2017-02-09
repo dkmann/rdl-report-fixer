@@ -2,7 +2,7 @@ namespace ConsoleApplication
 {
     class Report
     {
-        public string Path { get; set; }
+        public string Path { get; private set; }
 
         public int NumberOfIssuesFixed { get; set; }
 

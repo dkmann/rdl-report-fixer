@@ -8,8 +8,6 @@ namespace ConsoleApplication
     {
         private Report _report;
 
-        private int _numberOfIssuesFixed;
-
         public void LoadReport(string report)
         {
             this._report = new Report(report);

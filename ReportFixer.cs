@@ -37,15 +37,7 @@ namespace ConsoleApplication
                         // Do the pattern replacement.
                         ConvertCmToMm(ref line);
                         RoundDecimals(ref line);
-
-                        var reportUnitPattern = @"<rd:ReportUnitType>Cm</rd:ReportUnitType>";
-
-                        line = Regex.Replace(line, reportUnitPattern,
-                            match =>
-                            {
-                                numberOfIssuesFixed++;
-                                return @"<rd:ReportUnitType>Mm</rd:ReportUnitType>";
-                            });
+                        ReplaceReportUnits(ref line);
 
                         // Write the modified line to the new file.
                         temporaryFileStream.WriteLine(line);
@@ -81,6 +73,18 @@ namespace ConsoleApplication
                     var number = double.Parse(match.Groups[1].Value);
                     number = Math.Round(number, 0, MidpointRounding.AwayFromZero);
                     return (number).ToString() + "mm";
+                });
+        }
+
+        private void ReplaceReportUnits(ref string line)
+        {
+            var reportUnitPattern = @"<rd:ReportUnitType>Cm</rd:ReportUnitType>";
+
+            line = Regex.Replace(line, reportUnitPattern,
+                match =>
+                {
+                    this._numberOfIssuesFixed++;
+                    return @"<rd:ReportUnitType>Mm</rd:ReportUnitType>";
                 });
         }
     }

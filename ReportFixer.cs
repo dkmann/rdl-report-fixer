@@ -6,13 +6,13 @@ namespace ConsoleApplication
 {
     class ReportFixer
     {
-        private string _report;
+        private Report _report;
 
         private int _numberOfIssuesFixed;
 
         public void LoadReport(string report)
         {
-            this._report = report;
+            this._report = new Report(report);
             this._numberOfIssuesFixed = 0;
         }
 

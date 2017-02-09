@@ -42,7 +42,8 @@ namespace ConsoleApplication
                     }
                 }
             }
-            // Replace current with temporary.
+
+            // Replace the current file with temporary one.
             File.Delete(this._report);
             File.Move(temporaryFile, this._report);
         }

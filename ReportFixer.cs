@@ -11,7 +11,6 @@ namespace ConsoleApplication
         public void LoadReport(string report)
         {
             this._report = new Report(report);
-            this._report.NumberOfIssuesFixed = 0;
         }
 
         public void FixUnits()

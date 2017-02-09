@@ -9,6 +9,7 @@ namespace ConsoleApplication
         public Report(string path)
         {
             this.Path = path;
+            this.NumberOfIssuesFixed = 0;
         }
     }
 }

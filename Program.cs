@@ -4,13 +4,19 @@ namespace ConsoleApplication
 {
     public class Program
     {
+        /// <summary>
+        /// Main entry point of the Command Line program.
+        /// </summary>
         public static void Main(string[] args)
         {
             Console.WriteLine("Welcome to the Report Fixer! Enter the path of a report to begin tidying.");
+
             var fixer = new ReportFixer();
             var reportPath = Console.ReadLine();
+
             fixer.LoadReport(reportPath);
             Console.WriteLine("Processing report...");
+
             fixer.FixUnits();
             Console.WriteLine($"Processed report at: {reportPath}");
 
